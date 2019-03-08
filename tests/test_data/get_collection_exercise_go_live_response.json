@@ -1,0 +1,31 @@
+{
+    "id": "79d67fef-7ee3-4d7c-a2d9-23ea10c6acae",
+    "eventPK": 12309,
+    "tag": "go_live",
+    "timestamp": "2018-12-14T00:00:00.000Z",
+    "collectionExercise": {
+        "id": "df7bd9c6-f309-4bf8-a90c-0fa027dcfe16",
+        "exercisePK": 2088,
+        "actualExecutionDateTime": "2019-03-07T16:04:13.817Z",
+        "scheduledExecutionDateTime": "2018-12-07T00:00:00.000Z",
+        "scheduledStartDateTime": "2018-12-07T00:00:00.000Z",
+        "actualPublishDateTime": null,
+        "periodStartDateTime": "2018-12-07T00:00:00.000Z",
+        "periodEndDateTime": "2021-01-31T00:00:00.000Z",
+        "scheduledReturnDateTime": "2019-01-09T00:00:00.000Z",
+        "scheduledEndDateTime": "2021-01-31T00:00:00.000Z",
+        "executedBy": null,
+        "state": "LIVE",
+        "sampleSize": 8,
+        "exerciseRef": "201812",
+        "userDescription": "December 2018",
+        "created": "2019-03-07T16:02:33.437Z",
+        "updated": "2019-03-07T16:04:14.398Z",
+        "deleted": null,
+        "surveyId": "cb8accda-6118-4d3b-85a3-149e28960c54"
+    },
+    "created": "2019-03-07T16:03:08.475Z",
+    "updated": null,
+    "deleted": false,
+    "messageSent": "2019-03-07T16:03:08.509Z"
+}

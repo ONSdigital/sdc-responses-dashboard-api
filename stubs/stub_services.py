@@ -1,4 +1,5 @@
 import json
+import uuid
 from datetime import datetime
 from random import SystemRandom
 
@@ -11,9 +12,9 @@ CORS(app)
 
 
 @app.route(
-    '/reporting-api/v1/response-dashboard/survey/<survey_id>/collection-exercise/<collection_exercise_id>',
+    '/reporting-api/v1/response-dashboard/survey/<_>/collection-exercise/<collection_exercise_id>',
     methods=['GET'])
-def get_report(survey_id, collection_exercise_id):
+def get_report(_, collection_exercise_id):
     rand_gen = SystemRandom()
 
     sample_size = rand_gen.randint(100, 1000)
@@ -278,6 +279,22 @@ def get_collection_exercises():
                     "validationErrors": None
                 }
             ]
+        )
+    )
+
+
+@app.route('/collectionexercises/<collection_exercise_id>/events/<event_tag>', methods=['GET'])
+def get_collection_exercise_event(collection_exercise_id, event_tag):
+    return Response(
+        json.dumps(
+            {
+                "id": str(uuid.uuid4()),
+                "tag": event_tag,
+                "timestamp": "2019-06-06T00:00:00.000Z",
+                "collectionExercise": {
+                    "id": collection_exercise_id
+                }
+            }
         )
     )
 
