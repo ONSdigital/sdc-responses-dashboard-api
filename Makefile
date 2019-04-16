@@ -18,8 +18,8 @@ check:
 test: check lint
 	pipenv run pytest tests --cov-report term-missing --cov app --capture no
 
-mock_services:
-	pipenv run python scripts/mock_services.py
+stub_services:
+	pipenv run python stubs/stub_services.py
 
 smoke_test:
 	pipenv run behave tests/functional/smoke_tests/features

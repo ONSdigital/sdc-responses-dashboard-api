@@ -51,29 +51,62 @@ const setCollexTableHeight = () => {
   }, 100);
 };
 
-const getCollexFromSurveyId = (surveys, surveyID) => {
+const getCollectionExerciseGoLive = (collexIDs, eventTag) => {
+  return $.ajax({
+    dataType: "json",
+    url: `/dashboard/collection-exercises/event/${eventTag}`,
+    data: { collexIDs }
+  });
+};
+
+const addCollectionExerciseData = (collexTable, surveys, surveyID) => {
   /**
-   *  Returns an array of collection exercises for a given survey id
+   *  For each collex in the specified survey, the collex DataTable is updated with the collex data.
    */
   const collectionExercises = [];
+
   surveys.forEach(function(survey) {
     if (survey.surveyId === surveyID) {
-      survey.collectionExercises.forEach(function(collex) {
+      const collexIDs = [];
+      const collectionExercisesCopy = [...survey.collectionExercises];
+
+      collectionExercisesCopy.forEach(function(collex) {
         if (collex.userDescription === "") {
           collex.userDescription = "No description provided";
         }
+        // collex.goLiveDate = "No go live provided";
+        collexIDs.push(collex.collectionExerciseId);
         collectionExercises.push(collex);
       });
+
+      const getCollectionExercisesWithGoLive = getCollectionExerciseGoLive(
+        [...new Set(collexIDs)],
+        "goLive"
+      );
+
+      getCollectionExercisesWithGoLive
+        .done(result => {
+          collectionExercisesCopy.forEach(function(collex) {
+            collectionExercises.splice(collectionExercises.indexOf(collex), 1);
+            collex.goLiveDate = result[collex.collectionExerciseId];
+            collectionExercises.push(collex);
+          });
+        })
+        .always(() => {
+          collexTable.clear().draw();
+          collexTable.rows.add(collectionExercises).draw();
+        });
     }
   });
-  return collectionExercises;
 };
 
 const customDateRenderer = (data, type, row, meta) => {
   if (type === "sort" || type === "type") {
     return data;
-  } else {
+  } else if (moment(data, moment.ISO_8601, true).isValid()) {
     return moment(data).format("DD-MM-YYYY");
+  } else {
+    return "No go live provided";
   }
 };
 
@@ -118,7 +151,7 @@ const initialiseCollexDataTable = () =>
         width: "50%"
       },
       {
-        data: "scheduledExecutionDateTime",
+        data: "goLiveDate",
         defaultContent: "No go live provided",
         title: "Go Live",
         width: "25%",
@@ -141,10 +174,7 @@ const populateCollexTable = (collexTable, surveyID) => {
    */
   const surveys = JSON.parse($("#collex-id").data("surveys"));
 
-  collexTable.clear().draw();
-
-  const collectionExercises = getCollexFromSurveyId(surveys, surveyID);
-  collexTable.rows.add(collectionExercises).draw();
+  addCollectionExerciseData(collexTable, surveys, surveyID);
 
   $("#modal-collex").modal("toggle");
 

@@ -13,9 +13,9 @@ collection_exercise_dates_blueprint = Blueprint(name='collection_exercise_events
 logger = get_logger()
 
 
-@collection_exercise_dates_blueprint.route('/collectionexercises/event/<event_tag>', methods=['GET'])
+@collection_exercise_dates_blueprint.route('/collection-exercises/event/<event_tag>', methods=['GET'])
 def collection_exercises_event_dates(event_tag):
-    collection_exercises = request.args.getlist('collectionExerciseId')
+    collection_exercises = request.args.getlist('collexIDs[]')
     if not collection_exercises:
         abort(400, 'No collection exercise IDs received')
 

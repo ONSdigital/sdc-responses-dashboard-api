@@ -137,7 +137,7 @@ const updateProgressData = response => {
 };
 
 const displayCollectionExerciseData = response => {
-  const report = getReport(response);
+  const report = getReport();
   const countersElement = $("#counters");
   countersElement.empty();
 
