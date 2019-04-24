@@ -1,5 +1,4 @@
 import json
-import os
 
 import responses
 
@@ -7,12 +6,10 @@ from tests.app import AppContextTestCase
 
 
 class TestDashboardView(AppContextTestCase):
-    current_file_path = os.path.dirname(__file__)
-
-    with open(os.path.join(current_file_path, '../../test_data/get_surveys_response.json')) as fp:
+    with open(AppContextTestCase.test_data_path.joinpath('get_surveys_response.json')) as fp:
         surveys_response = json.load(fp)
 
-    with open(os.path.join(current_file_path, '../../test_data/get_collection_exercises_response.json')) as fp:
+    with open(AppContextTestCase.test_data_path.joinpath('get_collection_exercises_response.json')) as fp:
         collex_response = json.load(fp)
 
     def mock_successful_external_api_calls(self):

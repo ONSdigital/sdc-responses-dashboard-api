@@ -1,21 +1,19 @@
 import json
-import os
 
 import responses
 
 from app.exceptions import UnknownSurveyError
-from app.survey_metadata import fetch_survey_and_collection_exercise_metadata, map_collection_exercise_id_to_survey_id, \
-    map_surveys_to_collection_exercises
+from app.survey_metadata import fetch_survey_and_collection_exercise_metadata, \
+    map_collection_exercise_id_to_survey_id, map_surveys_to_collection_exercises
 from tests.app import AppContextTestCase
 
 
 class TestSurveyMetadata(AppContextTestCase):
-    this_file_path = os.path.dirname(__file__)
 
-    with open(os.path.join(this_file_path, '../test_data/get_surveys_response.json')) as fp:
+    with open(AppContextTestCase.test_data_path.joinpath('get_surveys_response.json')) as fp:
         surveys_response = json.load(fp)
 
-    with open(os.path.join(this_file_path, '../test_data/get_collection_exercises_response.json')) as fp:
+    with open(AppContextTestCase.test_data_path.joinpath('get_collection_exercises_response.json')) as fp:
         collection_exercises_response = json.load(fp)
 
     def test_map_surveys_to_collection_exercises(self):
