@@ -40,6 +40,64 @@ def get_report(survey_id, collection_exercise_id):
     return Response(json.dumps(response), content_type='application/json')
 
 
+@app.route('/collectionexercises/<ce_id>/events', methods=['GET'])
+def get_collection_exercise_events(ce_id):
+    return Response(
+        json.dumps(
+            [
+                {
+                    "id": "f924633a-573e-4bb8-9a44-bd571d517fa9",
+                    "collectionExerciseId": ce_id,
+                    "tag": "employment",
+                    "timestamp": "2018-06-15T00:00:00.000Z"
+                },
+                {
+                    "id": "6b5f9a2f-7b5c-40c5-818f-07c8904418c5",
+                    "collectionExerciseId": ce_id,
+                    "tag": "exercise_end",
+                    "timestamp": "2020-08-31T00:00:00.000Z"
+                },
+                {
+                    "id": "7f530007-6213-44d7-99f7-08fda2792946",
+                    "collectionExerciseId": ce_id,
+                    "tag": "go_live",
+                    "timestamp": "2018-06-25T00:00:00.000Z"
+                },
+                {
+                    "id": "bed8307d-df6a-403c-b2f0-04c219bc88b4",
+                    "collectionExerciseId": ce_id,
+                    "tag": "mps",
+                    "timestamp": "2018-06-19T00:00:00.000Z"
+                },
+                {
+                    "id": "8b5c3766-5658-46ea-ba48-0187b54f997a",
+                    "collectionExerciseId": ce_id,
+                    "tag": "ref_period_end",
+                    "timestamp": "2018-06-30T00:00:00.000Z"
+                },
+                {
+                    "id": "ca3ae637-0195-4423-bc75-aa11ab7c86d5",
+                    "collectionExerciseId": ce_id,
+                    "tag": "ref_period_start",
+                    "timestamp": "2018-06-01T00:00:00.000Z"
+                },
+                {
+                    "id": "ad5836b0-7159-47f1-8273-a247e3e07032",
+                    "collectionExerciseId": ce_id,
+                    "tag": "reminder",
+                    "timestamp": "2018-07-10T00:00:00.000Z"
+                },
+                {
+                    "id": "de82fff7-39ad-4355-be45-608f4d03b54a",
+                    "collectionExerciseId": ce_id,
+                    "tag": "return_by",
+                    "timestamp": "2018-07-07T00:00:00.000Z"
+                }
+            ]
+        )
+    )
+
+
 @app.route('/surveys', methods=['GET'])
 def get_surveys():
     return Response(
