@@ -4,6 +4,8 @@ from app.controllers.collection_exercise_controller import get_collection_exerci
 from app.controllers.survey_controller import get_survey_list
 from app.exceptions import UnknownSurveyError
 
+import pprint
+
 logger = get_logger()
 
 
